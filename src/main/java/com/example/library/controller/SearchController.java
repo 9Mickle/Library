@@ -23,7 +23,7 @@ public class SearchController {
 
     @GetMapping("/all")
     public ResponseEntity<List<BookDTO>> getALlBooks() {
-        List<BookDTO> bookDTOList = searchService.getAllBook()
+        List<BookDTO> bookDTOList = searchService.getAllBooks()
                 .stream()
                 .map(bookFacade::bookToBookDTO)
                 .collect(Collectors.toList());

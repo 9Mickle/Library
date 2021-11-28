@@ -15,6 +15,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findById(Long userId);
 
+    /**
+     * Search for all users who have this book.
+     */
     @Query(nativeQuery = true, value = "Select u.* from user_book ub Right join user u on u.Id = ub.user_id Where ub.book_id = (:bookId)")
     Optional<List<User>> findAllUsersForBook(@Param("bookId") Long bookId);
 }

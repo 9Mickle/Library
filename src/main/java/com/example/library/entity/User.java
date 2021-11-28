@@ -7,6 +7,10 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Presentation of the user in the database.
+ * The task did not say whether two users can have 2 identical books, so the connection is many to many.
+ */
 @Entity
 @Data
 @NoArgsConstructor

@@ -83,7 +83,7 @@ public class BookController {
 
     @GetMapping("/{userId}/my_books_all")
     public ResponseEntity<List<BookDTO>> getAllBooksForUser(@PathVariable("userId") String userId) {
-        List<BookDTO> bookDTOList = bookService.getAllBookForUser(Long.parseLong(userId))
+        List<BookDTO> bookDTOList = bookService.getAllBooksForUser(Long.parseLong(userId))
                 .stream()
                 .map(bookFacade::bookToBookDTO)
                 .collect(Collectors.toList());

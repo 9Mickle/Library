@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+  jrtb-db:
+    image: mysql
+    restart: always
+    container_name: dev-jrtb-db
+    ports:
+      - "33060:3306"
+    environment:
+      MYSQL_DATABASE: "library"
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root

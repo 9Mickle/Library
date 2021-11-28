@@ -1,5 +1,6 @@
 package com.example.library.controller;
 
+import com.example.library.dto.BookDTO;
 import com.example.library.dto.UserDTO;
 import com.example.library.entity.User;
 import com.example.library.facade.UserFacade;
@@ -69,6 +70,16 @@ public class UserController {
     @GetMapping("/all")
     public ResponseEntity<Object> getAllUser() {
         List<UserDTO> userDTOList = userService.getAllUser()
+                .stream()
+                .map(userFacade::userToUserDTO)
+                .collect(Collectors.toList());
+
+        return new ResponseEntity<>(userDTOList, HttpStatus.OK);
+    }
+
+    @GetMapping("/{bookId}/users_all")
+    public ResponseEntity<List<UserDTO>> getAllUsersForBook(@PathVariable("bookId") String bookId) {
+        List<UserDTO> userDTOList = userService.getAllUsersForBook(Long.parseLong(bookId))
                 .stream()
                 .map(userFacade::userToUserDTO)
                 .collect(Collectors.toList());
