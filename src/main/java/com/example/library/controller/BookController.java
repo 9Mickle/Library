@@ -40,14 +40,15 @@ public class BookController {
         return new ResponseEntity<>(new MessageResponse("Book created successfully"), HttpStatus.OK);
     }
 
-    @PostMapping("/update")
-    public ResponseEntity<Object> updateBook(@Valid @RequestBody BookDTO bookDTO, BindingResult bindingResult) {
+    @PostMapping("/{bookId}/update")
+    public ResponseEntity<Object> updateBook(@Valid @RequestBody BookDTO bookDTO, BindingResult bindingResult,
+                                             @PathVariable("bookId") String bookId) {
         ResponseEntity<Object> errors = responseErrorValidation.mapValidationService(bindingResult);
         if (!ObjectUtils.isEmpty(errors)) {
             return errors;
         }
 
-        Book book = bookService.updateBook(bookDTO);
+        Book book = bookService.updateBook(Long.parseLong(bookId), bookDTO);
         BookDTO bookUpdated = bookFacade.bookToBookDTO(book);
         return new ResponseEntity<>(bookUpdated, HttpStatus.OK);
     }
@@ -61,11 +62,23 @@ public class BookController {
 
     @PostMapping("/{bookId}/{userId}/add")
     public ResponseEntity<Object> takeBook(@Valid @PathVariable("bookId") String bookId,
-                                                    @PathVariable("userId") String userId) {
+                                           @PathVariable("userId") String userId) {
 
-        Book book = bookService.takeBookForUser(Long.parseLong(bookId), Long.parseLong(userId));
-        BookDTO bookDTO = bookFacade.bookToBookDTO(book);
-        return new ResponseEntity<>(bookDTO, HttpStatus.OK);
+        List<BookDTO> bookDTOList = bookService.takeBookForUser(Long.parseLong(bookId), Long.parseLong(userId))
+                .stream()
+                .map(bookFacade::bookToBookDTO)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(bookDTOList, HttpStatus.OK);
+    }
+
+    @PostMapping("/{bookId}/{userId}/delete")
+    public ResponseEntity<Object> deleteBookForUser(@Valid @PathVariable("bookId") String bookId,
+                                                    @PathVariable("userId") String userId) {
+        List<BookDTO> bookDTOList = bookService.deleteBookForUser(Long.parseLong(bookId), Long.parseLong(userId))
+                .stream()
+                .map(bookFacade::bookToBookDTO)
+                .collect(Collectors.toList());
+        return new ResponseEntity<>(bookDTOList, HttpStatus.OK);
     }
 
     @GetMapping("/{userId}/my_books_all")

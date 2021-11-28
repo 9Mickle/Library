@@ -27,5 +27,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     Optional<List<Book>> findAllByTitleContainingAndPublishDate(String title, Integer date);
 
     @Query(nativeQuery = true, value = "Select b.* from user_book ub Left join book b on b.Id = ub.book_id Where ub.user_id = (:userId)")
-    Optional<List<Book>> findAllBookForUser(@Param("userId") Long userId);
+    Optional<List<Book>> findAllBooksForUser(@Param("userId") Long userId);
 }

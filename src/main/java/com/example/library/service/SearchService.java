@@ -23,12 +23,14 @@ public class SearchService {
 
     public List<Book> searchByDescription(String description) {
         return bookRepository.findAllByDescriptionContaining(description)
-                .orElseThrow(() -> new BookNotFoundException("Book not found with description: " + description));
+                .orElseThrow(() -> new BookNotFoundException(
+                        "Book not found with description: " + description));
     }
 
     public List<Book> searchByPublishDate(Integer publishDate) {
         return bookRepository.findAllByPublishDate(publishDate)
-                .orElseThrow(() -> new BookNotFoundException("Book not found with publishDate: " + publishDate));
+                .orElseThrow(() -> new BookNotFoundException(
+                        "Book not found with publishDate: " + publishDate));
     }
 
     public List<Book> searchByTitleAndDescription(String title, String description) {

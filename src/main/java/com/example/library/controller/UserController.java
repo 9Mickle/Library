@@ -40,14 +40,15 @@ public class UserController {
         return ResponseEntity.ok(new MessageResponse("User created successfully"));
     }
 
-    @PostMapping("/update")
-    public ResponseEntity<Object> updateUser(@Valid @RequestBody UserDTO userDTO, BindingResult bindingResult) {
+    @PostMapping("/{userId}/update")
+    public ResponseEntity<Object> updateUser(@Valid @RequestBody UserDTO userDTO, BindingResult bindingResult,
+                                             @PathVariable("userId") String userId) {
         ResponseEntity<Object> errors = responseErrorValidation.mapValidationService(bindingResult);
         if (!ObjectUtils.isEmpty(errors)) {
             return errors;
         }
 
-        User user = userService.updateUser(userDTO);
+        User user = userService.updateUser(Long.parseLong(userId), userDTO);
         UserDTO userUpdated = userFacade.userToUserDTO(user);
         return new ResponseEntity<>(userUpdated, HttpStatus.OK);
     }

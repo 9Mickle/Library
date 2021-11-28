@@ -61,7 +61,7 @@ public class SearchController {
 
     @GetMapping("title/{title}/description/{description}")
     public ResponseEntity<List<BookDTO>> getBooksByTitleAndDescription(@PathVariable("title") String title,
-                                                               @PathVariable("description") String description) {
+                                                                       @PathVariable("description") String description) {
         List<BookDTO> bookDTOList = searchService.searchByTitleAndDescription(title, description)
                 .stream()
                 .map(bookFacade::bookToBookDTO)
@@ -71,7 +71,7 @@ public class SearchController {
     }
 
     @GetMapping("title/{title}/date/{date}")
-    public ResponseEntity<List<BookDTO>> getBooksByTitleAndDescription(@PathVariable("title") String title,
+    public ResponseEntity<List<BookDTO>> getBooksByTitleAndDate(@PathVariable("title") String title,
                                                                        @PathVariable("date") Integer date) {
         List<BookDTO> bookDTOList = searchService.searchByTitleAndDate(title, date)
                 .stream()
