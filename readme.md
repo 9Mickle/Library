@@ -74,3 +74,7 @@ User, Book and user_book
     * api/search/title/:title/description/:description- GET a Book that has this title and description.
     * api/search/title/:title/date/:date- GET a Book that has this title and publish date.
 
+## Test
+
+### Testing of this application was carried out in the Postman environment
+### The file is called Library.postman_collection.json
