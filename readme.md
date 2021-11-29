@@ -3,8 +3,8 @@
 ## Task conditions:
 ### 1 Create a backend application that allows:
 
-##Task conditions:
-###1 Create a backend application that allows:
+## Task conditions:
+### 1 Create a backend application that allows:
 
 * CRUD for User entity (email, first name, last name, patronymic, books)
 * CRUD for Book entity (title, description, publish date)
