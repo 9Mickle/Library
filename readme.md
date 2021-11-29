@@ -1,7 +1,5 @@
 ![library_image](https://cdn.icon-icons.com/icons2/567/PNG/128/bookshelf_icon-icons.com_54414.png)
 # Library - CRUD application
-## Task conditions:
-### 1 Create a backend application that allows:
 
 ## Task conditions:
 ### 1 Create a backend application that allows:
