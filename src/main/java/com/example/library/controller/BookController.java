@@ -90,4 +90,12 @@ public class BookController {
 
         return new ResponseEntity<>(bookDTOList, HttpStatus.OK);
     }
+
+    @GetMapping("/{bookId}")
+    public ResponseEntity<BookDTO> getBookById(@PathVariable("bookId") String bookId) {
+        Book book = bookService.getBookById(Long.parseLong(bookId));
+        BookDTO bookDTO = bookFacade.bookToBookDTO(book);
+
+        return new ResponseEntity<>(bookDTO, HttpStatus.OK);
+    }
 }
